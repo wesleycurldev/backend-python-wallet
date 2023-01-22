@@ -1,6 +1,6 @@
 # backend-python-wallet
 ### Objetivo
-Gerenciar valores de cashback e garantir validade dos dados antes de efetivar o cashback de fato.
+Gerenciar valores de cashback e garantir a validade dos dados antes de efetivar o cashback de fato.
 
 ### Arquitetura
 Esse serviço foi desenvolvido baseado em uma arquitetura de microsserviços e um design de software focado em Clean Architecture.
