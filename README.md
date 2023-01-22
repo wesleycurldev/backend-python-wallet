@@ -12,36 +12,50 @@ Motivação: Em um cenário competitivo onde a mudança é cada vez maior, softw
 ### Estrutura
 Toda a estrutura do projeto foi desenvolvida visando garantir separar tecnologias externas como por exemplo frameworks, banco de dados etc. das camadas de application e domínio onde estão as regras de negócio, validações, entidades, exceptions e etc. Consequentemente isso traz o benefício de conseguirmos alterar camadas mais externas ao domínio e application com mínimo de empenho.
 ```
-backend-python-auth
+backend-python-wallet
+├─ .env
+├─ .gitignore
+├─ Dockerfile
 ├─ README.md
-├─ auth_service
-│  ├─ application
-│  │  └─ user
-│  │     ├─ user_dto.py
-│  │     └─ user_services.py
-│  ├─ domain
-│  │  └─ user
-│  │     ├─ entities.py
-│  │     ├─ enums.py
-│  │     └─ exceptions.py
-│  └─ tests
-│     ├─ mocks
-│     │  └─ user_services_mocks.py
-│     └─ tests_user_services.py
-├─ backend-python-auth.png
+├─ backend-python-wallet.png
 ├─ docker-compose.yml
 ├─ infrastructure
-│  └─ wallet
-│     ├─ .env
-│     ├─ api
-│     │  ├─ api.py
-│     │  ├─ models
-│     │  │  ├─ db.py
-│     │  │  └─ users.py
-│     │  └─ repositories
-│     │     └─ users.py
-│     └─ requirements.txt
-└─ initial_tables_auth.sql
+│  └─ api
+│     ├─ api.py
+│     ├─ models
+│     │  ├─ cashbacks.py
+│     │  ├─ db.py
+│     │  └─ processed_cashbacks.py
+│     └─ repositories
+│        ├─ cashbacks.py
+│        └─ processed_cashbacks.py
+├─ initial_tables_wallet.sql
+├─ requirements.txt
+└─ wallet_service
+   ├─ application
+   │  ├─ cashback
+   │  │  ├─ cashback_dto.py
+   │  │  ├─ cashback_services.py
+   │  │  └─ cashback_storage.py
+   │  └─ processed_cashbacks
+   │     ├─ processed_cashback_dto.py
+   │     ├─ processed_cashback_services.py
+   │     └─ processed_cashback_storage.py
+   ├─ domain
+   │  ├─ cashbacks
+   │  │  ├─ entities.py
+   │  │  ├─ enums.py
+   │  │  └─ exceptions.py
+   │  └─ processed_cashbacks
+   │     ├─ entities.py
+   │     ├─ enums.py
+   │     └─ exceptions.py
+   └─ tests
+      ├─ mocks
+      │  ├─ cashback_services_mocks.py
+      │  └─ processed_cashback_services_mocks.py
+      ├─ tests_cashback_services.py
+      └─ tests_processed_cashback_services.py
 ```
 ### Camadas Externas (tecnologias)
 #### Banco de dados: `PostgreSQL`
@@ -80,4 +94,3 @@ Na raiz do projeto digite o seguinte comando:
 docker-compose up -d
 ```
 `IMPORTANTE: Em um cenário real eu não subiria o arquivo .env no git, só subi para facilitar a vida de quem vai testar este software e os dados nele contido são fictícios, em um ambiente produtivo eu usaria o secretManager da aws para armazenar os dados sensíveis.`
-
