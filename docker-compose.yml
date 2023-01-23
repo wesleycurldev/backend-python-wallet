@@ -1,0 +1,20 @@
+version: '3.8'
+services:
+  wallet-db:
+    image: postgres:14.1-alpine
+    restart: always
+    environment:
+      - POSTGRES_USER=maistodos_wallet
+      - POSTGRES_PASSWORD=MaisTodos2023!
+    ports:
+      - '5434:5432'
+    volumes: 
+      - ./initial_tables_wallet.sql:/docker-entrypoint-initdb.d/initial_tables_wallet.sql
+
+  wallet-api:
+    build: '.'
+    ports:
+      - '6000:6000'
+    depends_on:
+      - wallet-db
+    network_mode: "host" 
