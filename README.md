@@ -66,7 +66,7 @@ backend-python-wallet
 #### Framework: `Flask`
 ##### Motivação:
 * Simplicidade.
-* Facilidade de aplicar os conceitos do Clean Architecture e alguns Design Patterns.
+* Baixo acoplamento e facilidade de aplicar alguns Design Patterns.
 * Agilidade no desenvolvimento da aplicação.
 
 ### Camadas Internas (Regras de negócio, validação, testes etc)
