@@ -8,11 +8,13 @@ from external_requests.confirm_cashback import confirm_cashback
 
 from dotenv import load_dotenv
 from os import environ
+from flasgger import Swagger
 
 load_dotenv()
 
 app = Flask(__name__)
 
+Swagger(app)
 CORS(app, resources={r"/api/*": {"origins": "http://localhost:5000"}})
 
 app.config['SECRET_KEY'] = environ.get("SECRET_KEY")
@@ -25,6 +27,42 @@ app.app_context().push()
 
 @app.route('/api/cashback', methods=['POST'])
 def cashback():
+    """Endpoint cashback processing api.
+    ---
+    tags:
+      - cashback
+    parameters:
+      - name: sold_at
+        in: path
+        type: datetime
+        required: true
+      - name: customer
+        in: path
+        type: dict
+        required: true
+      - name: total
+        in: path
+        type: float
+        required: true
+      - name: products
+        in: path
+        type: list
+        required: true
+    responses:
+      200:
+        description: cashback processing response
+        schema:
+          id: Cashback
+          type: object
+          properties:
+            code:
+              type: string
+            error:
+              type: boolean
+              default: False
+            message:
+              type: string
+    """
     try:
         request_body = request.get_json()
         
